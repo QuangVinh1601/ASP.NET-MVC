@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "_Layout";
+    var product = this.ViewData["product"] as ProductModel;
+}
+<div class="card bg-success text-white">
+    <h1 class="card-header"> @product.Name</h1>
+    <div class="card-body">
+        <p class="card-text">@product.Description</p>
+    </div>
+</div>
+<hr />
