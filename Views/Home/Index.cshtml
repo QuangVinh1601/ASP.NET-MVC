@@ -6,3 +6,54 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+// Các Controller không có Area
+<p>
+    @Url.ActionLink()
+</p>
+
+<p>
+    @Url.Action()
+</p>
+
+<p>
+    @Url.Action("Privacy")
+</p>
+
+<p>
+    @Url.Action("Mercury", "Planet")
+</p>
+
+<p>
+    @Url.Action("PlanetInfo", "Planet", new { idd = 1 })
+</p>
+
+// Các Controller có Area
+
+<p>
+    @Url.Action("Index", "Product", new {area ="ProductList", idd=12345} )
+</p>
+ 
+// Lấy ra địa chỉ URL dựa trên Name của Route
+<p>
+    @Url.RouteUrl("default", new { action = "Index1", controller = "Product", idd = 1, name = "QuangVinh" })
+</p>
+
+<p>
+    @Url.RouteUrl("PlanetInfo")
+</p>
+// Lấy ra địa chỉ URL dựa trên Tag Helper của HTML Helper
+
+
+@{
+    var parameter = new Dictionary<string, string>()
+    {
+        {"id", "3"},
+        {"name" , "QuangVinh"},
+        {"abc", "XYZ"}
+    };
+}
+
+<a asp-action="Index" asp-area="ProductList" asp-controller="Product" asp-all-route-data="@parameter">Quang Vinh</a>
+
+

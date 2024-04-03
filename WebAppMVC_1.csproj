@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Files\" />
+    <Folder Include="Views\Product\" />
+    <Folder Include="wwwroot\planet\" />
   </ItemGroup>
 
 </Project>

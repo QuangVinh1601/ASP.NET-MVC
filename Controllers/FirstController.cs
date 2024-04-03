@@ -117,6 +117,7 @@ namespace WebAppMVC_1.Controllers
 
             return View();
         }
+        [AcceptVerbs("POST","GET")]
         public IActionResult ViewProduct(int? id)
         {
             if (id == null)
