@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebAppMVC_1.ExtensionMethods;
+using WebAppMVC_1.Models;
 using WebAppMVC_1.Services;
 
 namespace WebAppMVC_1
@@ -32,6 +34,11 @@ namespace WebAppMVC_1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(optionBuilder =>
+            {
+                string connectionString = Configuration.GetConnectionString("ASPNET.MVC_ConnectionString");
+                optionBuilder.UseSqlServer(connectionString);
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.Configure<RazorViewEngineOptions>(options =>
