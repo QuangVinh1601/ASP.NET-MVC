@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Contact\Controllers\" />
+    <Folder Include="Areas\Contact\Views\" />
     <Folder Include="Files\" />
     <Folder Include="Views\Product\" />
     <Folder Include="wwwroot\planet\" />
@@ -22,6 +24,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="MySql.Data.EntityFramework" Version="8.3.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
