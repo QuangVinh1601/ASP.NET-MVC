@@ -9,18 +9,21 @@ namespace WebAppMVC_1.Models.Contact
     {
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Vui lòng nhập {0}")]
         [StringLength(100)]
         [Column(TypeName = "nvarchar")]
+        [Display(Name="Họ tên")]
         public string Name { get; set; }
-        [Required]
-        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage ="Phải nhập {0}")]
         [StringLength(100)]
+        [Display(Name = "Địa chỉ Email")]
+        [EmailAddress(ErrorMessage ="Sai định dạng Email")]
         public string Email { get; set; }
-        [DataType(DataType.PhoneNumber)]
+        [Display(Name="Số điện thoại")]
+        [Phone(ErrorMessage ="Sai định dạng số điện thoại")]
         public string Phone { get; set; }
-        public DateTime DateSend { get; set; }
-
+        public DateTime? DateSend { get; set; }
+        [Display(Name="Lời nhắn")]
         public string Message { get; set; }
     }
 }

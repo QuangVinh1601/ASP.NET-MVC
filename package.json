@@ -1,0 +1,27 @@
+{
+  "name": "webappmvc_1",
+  "version": "1.0.0",
+  "description": "- Là một lớp kế thừa từ lớp Controller: Microsoft.AspNetCore.Mvc\r - Khi khởi tạo Controller, thì hệ thống sẽ khởi tạo các thuộc tính cho C để chứa các dữ liệu mà Http request nó gửi đến \r - Action trả về bất kỳ kiểu dữ liệu nào, thường là IActionResult\r - Các dịch vụ được inject vào Controller qua phương thức khởi tạo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^5.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^5.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^9.0.0",
+    "rimraf": "^5.0.5"
+  },
+  "devDependencies": {
+    "gulp-cssmin": "^0.2.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "postcss": "^8.4.38",
+    "sass": "^1.74.1"
+  }
+}

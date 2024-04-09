@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using App.Data;
+using App.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 using WebAppMVC_1.Models;
 
@@ -10,9 +15,15 @@ namespace WebAppMVC_1.Areas.Database1.Controllers
     public class DbManageController : Controller
     {
         private readonly AppDbContext _context;
-        public DbManageController(AppDbContext context)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly ILogger<DbManageController> _logger;
+        public DbManageController(AppDbContext context , RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, ILogger<DbManageController> logger)
         {
             _context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -40,6 +51,36 @@ namespace WebAppMVC_1.Areas.Database1.Controllers
         {
             await _context.Database.MigrateAsync(); // Cập nhật các Migration ở trạng thái Pending
             StatusMessage = "Cập nhập Migration thành công";
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> SeedDataAsync()
+        {
+            var roleNames = typeof(RoleName).GetFields().ToList();
+            _logger.LogInformation("Quang VInh ");
+            foreach ( var r in roleNames)
+            {
+                var roleName = (string)r.GetRawConstantValue();
+                _logger.LogInformation(roleName);
+                var role =  await _roleManager.FindByNameAsync(roleName);
+                if (role == null)
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+            var useradmin = await _userManager.FindByNameAsync("admin");
+            if(useradmin == null)
+            {
+                useradmin = new AppUser
+                {
+                    UserName = "admin", 
+                    EmailConfirmed = true,
+                    Email = "admin@example.com"
+                };
+                await _userManager.CreateAsync(useradmin, "admin123");
+                await _userManager.AddToRoleAsync(useradmin, RoleName.Administrator);
+            }
+           
+            StatusMessage = "SeedData thành công";
             return RedirectToAction("Index");
         }
     }

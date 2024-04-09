@@ -16,7 +16,7 @@ namespace WebAppMVC_1.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateSend = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateSend = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

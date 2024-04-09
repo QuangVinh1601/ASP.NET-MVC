@@ -10,7 +10,7 @@ using WebAppMVC_1.Models;
 namespace WebAppMVC_1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240404160929_Contact2")]
+    [Migration("20240405042649_Contact2")]
     partial class Contact2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace WebAppMVC_1.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateSend")
+                    b.Property<DateTime?>("DateSend")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")

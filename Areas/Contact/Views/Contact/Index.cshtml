@@ -4,7 +4,7 @@
     ViewData["Title"] = "Danh sách liên hệ";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 
 <table class="table">
@@ -22,9 +22,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.DateSend)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -43,9 +41,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateSend)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
+
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

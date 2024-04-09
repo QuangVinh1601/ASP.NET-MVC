@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using WebAppMVC_1.Models.Contact;
 namespace WebAppMVC_1.Areas.Contact.Controllers
 {
     [Area("Contact")]
+    [Authorize(Roles = RoleName.Administrator)]
     public class ContactController : Controller
     {
         private readonly AppDbContext _context;
@@ -22,7 +24,7 @@ namespace WebAppMVC_1.Areas.Contact.Controllers
         }
 
         // GET: Contact
-        [HttpGet("/contact/list/")]
+        [HttpGet("/admin/contact")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Contacts.ToListAsync());
@@ -54,20 +56,23 @@ namespace WebAppMVC_1.Areas.Contact.Controllers
         {
             return View();
         }
-
+        [TempData]
+        public string StatusMessage { get; set; }
         // POST: Contact/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("/contact/")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendContact([Bind("Id,Name,Email,Phone,DateSend,Message")] ContactModel contactModel)
+        public async Task<IActionResult> SendContact([Bind("Name,Email,Phone,Message")] ContactModel contactModel)
         {
             if (ModelState.IsValid)
             {
+                contactModel.DateSend  = DateTime.Now;
                 _context.Add(contactModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                StatusMessage = "Bạn đã thêm liên hệ thành công";
+                return RedirectToAction("Index", "Home");
             }
             return View(contactModel);
         }
@@ -99,7 +104,7 @@ namespace WebAppMVC_1.Areas.Contact.Controllers
             var contactModel = await _context.Contacts.FindAsync(id);
             _context.Contacts.Remove(contactModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index","Home");
         }
 
 

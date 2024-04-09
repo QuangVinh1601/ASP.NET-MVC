@@ -1,16 +1,21 @@
 @model WebAppMVC_1.Models.Contact.ContactModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo liên hệ";
 }
 
-<h1>Create</h1>
 
-<h4>ContactModel</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <div class="contact-firstcol p-2 h-100">
+            <h1>@ViewData["Title"]</h1>
+            <h4>We always listen to customers!!</h4>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <form asp-action="SendContact" class="formcontact">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -27,24 +32,17 @@
                 <input asp-for="Phone" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DateSend" class="control-label"></label>
-                <input asp-for="DateSend" class="form-control" />
-                <span asp-validation-for="DateSend" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" />
+                <textarea rows="5" asp-for="Message" class="form-control"></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="SendContact" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
